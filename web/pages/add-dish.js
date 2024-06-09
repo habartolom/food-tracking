@@ -1,7 +1,8 @@
-import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+import React, { useEffect, useState } from "react";
 import Web3 from "web3";
-import abi from "../utils/abi";
+import { env } from "../next.config";
+import foodAbi from "../utils/foodAbi";
 
 export default function AddDish() {
     const [web3, setWeb3] = useState(null);
@@ -18,11 +19,15 @@ export default function AddDish() {
     useEffect(() => {
         const initWeb3 = async () => {
             try {
-                const serverUrl = process.env.NEXT_PUBLIC_SERVER;
-                const contractAddress = process.env.NEXT_PUBLIC_CONTRACT_ADDRESS;
+                const serverUrl = env.SERVER;
+                const foodContractAddress = env.FOOD_CONTRACT_ADDRESS;
+
+                if (!serverUrl || !foodContractAddress) {
+                    throw new Error("Server URL or Contract Address is not defined");
+                }
 
                 const web3Instance = new Web3(new Web3.providers.HttpProvider(serverUrl));
-                const foodContract = new web3Instance.eth.Contract(abi, contractAddress);
+                const foodContract = new web3Instance.eth.Contract(foodAbi, foodContractAddress);
                 setWeb3(web3Instance);
                 setContract(foodContract);
             } catch (error) {
@@ -30,19 +35,19 @@ export default function AddDish() {
                 setError(error);
             }
         };
+
         initWeb3();
     }, []);
 
     const addDish = async () => {
         if (web3 && contract) {
             try {
-                const accounts = await web3.eth.getAccounts();
-                const receipt = await contract.methods
+                const signer = localStorage.getItem('userAddress');
+                await contract.methods
                     .addFood(formInput.fileUrl, formInput.name, formInput.originCountry)
-                    .send({ from: accounts[0] });
+                    .send({ from: signer });
 
-                console.log('Food added:', receipt);
-                router.push('/');
+                router.push('/my-dishes');
             } catch (error) {
                 console.error("Failed to add food", error);
                 setError(error);
@@ -51,36 +56,41 @@ export default function AddDish() {
     };
 
     return (
-        <div className="flex justify-center">
-            <div className="w-1/2 flex flex-col pb-12">
-                <input
-                    placeholder="URL Food"
-                    className="mt-8 border rounded p-4"
-                    onChange={(e) =>
-                        updateFormInput({ ...formInput, fileUrl: e.target.value })
-                    }
-                />
-                <input
-                    placeholder="Food name"
-                    className="mt-2 border rounded p-4"
-                    onChange={(e) =>
-                        updateFormInput({ ...formInput, name: e.target.value })
-                    }
-                />
-                <input
-                    placeholder="Origin Country"
-                    className="mt-2 border rounded p-4"
-                    onChange={(e) =>
-                        updateFormInput({ ...formInput, originCountry: e.target.value })
-                    }
-                />
-                <button
-                    onClick={addDish}
-                    className="font-bold mt-4 bg-blue-500 text-white rounded p-4 shadow-lg"
-                >
-                    Add food
-                </button>
-                {error && <p className="text-red-500 mt-4">Error: {error.message}</p>}
+        <div>
+            <div className="flex justify-center my-4">
+                <p className="text-2xl font-bold">Agregar platillo</p>
+            </div>
+            <div className="flex justify-center">
+                <div className="w-1/2 flex flex-col pb-12">
+                    <input
+                        placeholder="URL"
+                        className="mt-8 border rounded p-4"
+                        onChange={(e) =>
+                            updateFormInput({ ...formInput, fileUrl: e.target.value })
+                        }
+                    />
+                    <input
+                        placeholder="Nombre del Platillo"
+                        className="mt-2 border rounded p-4"
+                        onChange={(e) =>
+                            updateFormInput({ ...formInput, name: e.target.value })
+                        }
+                    />
+                    <input
+                        placeholder="País de Origen"
+                        className="mt-2 border rounded p-4"
+                        onChange={(e) =>
+                            updateFormInput({ ...formInput, originCountry: e.target.value })
+                        }
+                    />
+                    <button
+                        onClick={addDish}
+                        className="font-bold mt-4 bg-blue-500 text-white rounded p-4 shadow-lg"
+                    >
+                        Añadir
+                    </button>
+                    {error && <p className="text-red-500 mt-4">Error: {error.message}</p>}
+                </div>
             </div>
         </div>
     );

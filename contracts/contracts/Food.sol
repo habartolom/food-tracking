@@ -1,4 +1,4 @@
-//SPDX-License-Identifier: Unlicense
+// SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
 import "hardhat/console.sol";
@@ -29,11 +29,7 @@ contract Food {
         return foods;
     }
 
-    function getFoodsByOwner()
-        public
-        view
-        returns (FoodItem[] memory)
-    {
+    function getFoodsByOwner() public view returns (FoodItem[] memory) {
         uint256 itemCount = 0;
 
         for (uint256 i = 0; i < foods.length; i++) {
@@ -43,9 +39,12 @@ contract Food {
         }
 
         FoodItem[] memory myfoods = new FoodItem[](itemCount);
+        uint256 index = 0;
+
         for (uint256 i = 0; i < foods.length; i++) {
             if (foods[i].owner == msg.sender) {
-                myfoods[i] = foods[i];
+                myfoods[index] = foods[i];
+                index += 1;
             }
         }
 
