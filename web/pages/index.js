@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import Web3 from "web3";
 import { env } from "../next.config";
+import styles from "../styles/Home.module.css";
 import foodAbi from "../utils/foodAbi";
 
 export default function Home() {
@@ -23,7 +24,6 @@ export default function Home() {
         // Fetch all dishes once the contract is set
         const foods = await foodContract.methods.getAllFoods().call();
         setDishes(foods);
-        console.log('foods', foods)
       } catch (error) {
         console.error("Failed to initialize web3 or contract", error);
         setError(error);
@@ -33,22 +33,20 @@ export default function Home() {
   }, []);
 
   return (
-    <div>
+    <div className={styles.container}>
       <div className="flex justify-center my-4">
-        <p className="text-2xl font-bold">Platillos del mundo</p>
+        <p className={styles.title}>Platillos del mundo</p>
       </div>
       <div className="flex justify-center">
         <div className="px-4" style={{ maxWidth: "1600px" }}>
           {error && <p className="text-red-500">Error: {error.message}</p>}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-4">
+          <div className={styles.grid}>
             {dishes.map((food, i) => (
-              <div key={i} className="border shadow rounded-xl overflow-hidden">
-                <img style={{ height: "20rem" }} src={food.foodUrl} alt={food.foodName} />
+              <div key={i} className={styles.card}>
+                <img className="w-full object-cover" src={food.foodUrl} alt={food.foodName} />
                 <div className="p-4">
-                  <p style={{ height: "64px" }} className="text-2xl font-semibold">{food.foodName}</p>
-                  <div style={{ height: "70px", overflow: "hidden" }}>
-                    <p>{food.originCountry}</p>
-                  </div>
+                  <p className="text-2xl font-semibold">{food.foodName}</p>
+                  <div className="text-gray-500">{food.originCountry}</div>
                 </div>
               </div>
             ))}

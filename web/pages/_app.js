@@ -24,32 +24,45 @@ function MyApp({ Component, pageProps }) {
     <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
       <div>
         <main>
-          <nav className="border-b p-6">
-            <p className="text-4xl font-bold">Food Eaters</p>
-            <div className="flex mt-4">
-              <Link href="/">
-                <a className="mr-4 text-pink-500">Inicio</a>
-              </Link>
-              {!isAuthenticated ? (
-                <>
-                  <Link href="/auth/register">
-                    <a className="mr-6 text-pink-500">Registrarme</a>
+          <nav className="bg-white shadow-md">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex items-center justify-between h-16">
+                <div className="flex-shrink-0">
+                  <Link href="/">
+                    <a className="text-4xl font-bold text-red-600 hover:text-red-800">Food Eaters</a>
                   </Link>
-                  <Link href="/auth/login">
-                    <a className="mr-6 text-pink-500">Iniciar Sesión</a>
+                </div>
+                <div className="hidden md:flex space-x-4">
+                  <Link href="/">
+                    <a className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium">Home</a>
                   </Link>
-                </>
-              ) : (
-                <>
-                  <Link href="/add-dish">
-                    <a className="mr-6 text-pink-500">Agregar platillos</a>
-                  </Link>
-                  <Link href="/my-dishes">
-                    <a className="mr-6 text-pink-500">Mis platillos</a>
-                  </Link>
-                  <button onClick={handleLogout} className="mr-6 text-pink-500">Cerrar Sesión</button>
-                </>
-              )}
+                  {!isAuthenticated ? (
+                    <>
+                      <Link href="/auth/register">
+                        <a className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium">Registrarme</a>
+                      </Link>
+                      <Link href="/auth/login">
+                        <a className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium">Iniciar Sesión</a>
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href="/add-dish">
+                        <a className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium">Agregar platillos</a>
+                      </Link>
+                      <Link href="/my-dishes">
+                        <a className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium">Mis platillos</a>
+                      </Link>
+                      <button
+                        onClick={handleLogout}
+                        className="text-gray-800 hover:text-red-600 px-3 py-2 rounded-md text-lg font-medium focus:outline-none"
+                      >
+                        Cerrar Sesión
+                      </button>
+                    </>
+                  )}
+                </div>
+              </div>
             </div>
           </nav>
         </main>

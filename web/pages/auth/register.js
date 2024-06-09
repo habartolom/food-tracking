@@ -1,4 +1,3 @@
-// pages/register.js
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Web3 from "web3";
@@ -91,30 +90,30 @@ export default function Register() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen py-2">
-      <h1 className="text-2xl font-bold mb-4">Registro</h1>
+    <div className="flex flex-col justify-center items-center min-h-screen">
+      <div className="flex justify-center my-4">
+        <h1 className="text-2xl font-bold mb-4">Registro</h1>
+      </div>
       {error && <p className="text-red-500 mb-4">Error: {error}</p>}
       {success && <p className="text-green-500 mb-4">{success}</p>}
-      <div className="mb-4">
+      <div className="w-full max-w-md flex flex-col">
         <input
           type="text"
-          placeholder="Username"
+          placeholder="Usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="border p-2"
+          className="mt-2 border rounded p-4 w-full"
         />
-      </div>
-      <div className="mb-4">
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="border p-2"
+          className="mt-2 border rounded p-4 w-full"
         />
-      </div>
-      <div className="mb-4">
-        <button onClick={handleRegister} className="bg-blue-500 text-white p-2">Register</button>
+        <button onClick={handleRegister} className="font-bold mt-4 bg-yellow-600 text-white rounded p-4 shadow-lg hover:bg-yellow-700 w-full">
+          Registrarme
+        </button>
       </div>
     </div>
   );

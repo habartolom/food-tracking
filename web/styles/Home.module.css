@@ -1,72 +1,27 @@
+/* Home.module.css */
 .container {
   min-height: 100vh;
-  padding: 0 0.5rem;
+  padding: 2rem;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-}
-
-.main {
-  padding: 5rem 0;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer {
-  width: 100%;
-  height: 100px;
-  border-top: 1px solid #eaeaea;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.footer a {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-grow: 1;
-}
-
-.title a {
-  color: #0070f3;
-  text-decoration: none;
-}
-
-.title a:hover,
-.title a:focus,
-.title a:active {
-  text-decoration: underline;
+  background-color: #f9f9f9;
 }
 
 .title {
   margin: 0;
   line-height: 1.15;
-  font-size: 4rem;
-}
-
-.title,
-.description {
+  font-size: 3rem;
+  color: #ff6f61;
   text-align: center;
 }
 
 .description {
   line-height: 1.5;
   font-size: 1.5rem;
-}
-
-.code {
-  background: #fafafa;
-  border-radius: 5px;
-  padding: 0.75rem;
-  font-size: 1.1rem;
-  font-family: Menlo, Monaco, Lucida Console, Liberation Mono, DejaVu Sans Mono,
-    Bitstream Vera Sans Mono, Courier New, monospace;
+  text-align: center;
+  color: #333;
 }
 
 .grid {
@@ -74,43 +29,49 @@
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  max-width: 800px;
+  max-width: 1000px;
   margin-top: 3rem;
 }
 
 .card {
   margin: 1rem;
-  padding: 1.5rem;
-  text-align: left;
+  padding: 1rem;
+  text-align: center;
   color: inherit;
   text-decoration: none;
   border: 1px solid #eaeaea;
   border-radius: 10px;
   transition: color 0.15s ease, border-color 0.15s ease;
-  width: 45%;
+  width: calc(25% - 2rem);
+  background-color: #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .card:hover,
 .card:focus,
 .card:active {
-  color: #0070f3;
-  border-color: #0070f3;
+  color: #ff6f61;
+  border-color: #ff6f61;
+}
+
+.card img {
+  border-radius: 10px;
+  width: 100%;
+  height: 12rem; /* Fija la altura de las imágenes */
+  object-fit: cover; /* Asegúrate de que las imágenes se ajusten al contenedor sin distorsionarse */
 }
 
 .card h2 {
-  margin: 0 0 1rem 0;
+  margin: 0.5rem 0;
   font-size: 1.5rem;
+  color: #333;
 }
 
 .card p {
   margin: 0;
-  font-size: 1.25rem;
+  font-size: 1rem;
   line-height: 1.5;
-}
-
-.logo {
-  height: 1em;
-  margin-left: 0.5rem;
+  color: #777;
 }
 
 @media (max-width: 600px) {
@@ -118,95 +79,8 @@
     width: 100%;
     flex-direction: column;
   }
-}
 
-.walletButton {
-  border: none;
-  margin: 0px;
-  text-decoration: none;
-  background: linear-gradient(
-      to right,
-      rgb(25, 96, 210),
-      rgb(88, 245, 208),
-      rgb(25, 96, 210),
-      rgb(88, 245, 208)
-    )
-    100% 0% / 200% 100%;
-  padding: 0.2rem;
-  display: inline-block;
-  user-select: none;
-  border-radius: 1.4rem;
-  color: rgb(255, 255, 255);
-  --iconColor: #ffffff;
-  transition: all 200ms ease 0s, transform 50ms ease 0s;
-  cursor: pointer;
-}
-
-.walletButtonText {
-  font-size: 1rem;
-  line-height: 2rem;
-  color: black;
-}
-
-.wrongNetwork {
-  width: 30rem;
-  height: 10rem;
-  background: rgb(238, 174, 202);
-  background: -moz-radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
-  background: -webkit-radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
-  background: radial-gradient(
-    circle,
-    rgba(238, 174, 202, 1) 0%,
-    rgba(148, 187, 233, 1) 100%
-  );
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#eeaeca",endColorstr="#94bbe9",GradientType=1);
-}
-
-.wrongNetwork > h1 {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  font-size: 2rem;
-  line-height: 2rem;
-  color: black;
-  margin-bottom: 1rem;
-  margin-top: 1rem;
-  --tw-text-opacity: 1;
-  color: rgba(153, 27, 27, var(--tw-text-opacity));
-}
-
-.wrongNetwork > p {
-  display: inherit;
-  justify-content: center;
-  align-items: center;
-  font-size: 1rem;
-  color: black;
-  margin-bottom: 1rem;
-  --tw-text-opacity: 1;
-  color: rgba(153, 27, 27, var(--tw-text-opacity));
-}
-
-.eth_connect_wallet_button {
-  height: 45px;
-  border: 0;
-  width: auto;
-  padding-left: 40px;
-  padding-right: 40px;
-  border-radius: 10px;
-  cursor: pointer;
-  font-size: 16px;
-  font-weight: bold;
-  color: white;
-  background: -webkit-linear-gradient(left, #60c657, #35aee2);
-  background-size: 200% 200%;
-  animation: gradient-animation 4s ease infinite;
+  .card {
+    width: 90%;
+  }
 }
