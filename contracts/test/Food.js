@@ -22,7 +22,7 @@ describe("Food", function () {
       .addFood(
         "https://www.lima2019.pe/sites/default/files/inline-images/preview-gallery-004_0.jpg",
         "Lomo Saltado",
-        "Colombia"
+        "Perú"
       );
 
     await addFood2.wait();

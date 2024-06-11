@@ -17,7 +17,7 @@ function MyApp({ Component, pageProps }) {
   const handleLogout = () => {
     localStorage.removeItem("userAddress");
     setIsAuthenticated(false);
-    window.location.href = '/'; // Redirigir a la página de inicio después de cerrar sesión
+    window.location.href = '/';
   };
 
   return (
